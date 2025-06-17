@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoMap — Экологическая карта</title>
+  
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-o9N1j6raZkE1Xn4SzM+IPm1w+DSA9kF9y8fXlY9Kc7o="
+    crossorigin=""
+  />
+
+  <style>
+    /* Стили для страницы и карты */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+    #map {
+      height: 100vh; /* во всю высоту экрана */
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Карта -->
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-sA+4GQNkVwFb+G+Y5I9lcQ4Af9QhP4B3kgdR1j0HH3s="
+    crossorigin=""
+  ></script>
+
+  <script>
+    // Инициализация карты на Астане
+    var map = L.map('map').setView([51.1605, 71.4704], 13);
+
+    // Подключаем карту OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Тестовые маркеры
+    L.marker([51.162, 71.467]).addTo(map)
+      .bindPopup("<b>Свалка у реки</b><br>Горы мусора на берегу");
+
+    L.marker([51.155, 71.480]).addTo(map)
+      .bindPopup("<b>Промышленный дым</b><br>Загрязнение воздуха от завода");
+  </script>
+
+</body>
+</html>
 
