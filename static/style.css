@@ -1,1 +1,110 @@
+#llmap {
+    height: 400px;
+     width: 400px
 
+    header a {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d4b3e;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+.report-btn {
+  border: 2px solid #2e7d32;
+  color: #2e7d32;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.report-btn:hover {
+  background-color: #2e7d32;
+  color: white;
+}
+.wave-container {
+  margin-top: 50px;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-container svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.footer {
+  background-color: #264f44;
+  color: white;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin: 5px 0;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #e0f5e7;
+  transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #b2dfdb;
+}
+
+.footer-social {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-social h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+}
+
+.social-icons img {
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+ }
