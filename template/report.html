@@ -1,0 +1,84 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+    body { background-color: #e9fbe9; padding: 30px; }
+    .form-container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 12px; }
+    #map { height: 300px; margin-bottom: 20px; }
+  </style>
+  <link rel="stylesheet" href="{{url_for('static', filename='leaflet/leaflet.css')}}">
+  <script src="{{url_for('static', filename='leaflet/leaflet.js')}}"></script>
+
+<header style="background-color: #e6f2e6; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+  <div style="font-size: 32px; font-weight: bold; color: #2e7d32;">
+    🌱 EcoKöz
+  </div>
+
+
+  <nav>
+    <a href="/" style="margin: 0 20px; text-decoration: none; color: #2e7d32;">Home</a>
+      <a href="#about" style="margin: 0 20px; text-decoration: none; color: #2e7d32;" >О проекте</a>
+      <a href="#facts" style="margin: 0 20px; text-decoration: none; color: #2e7d32;" >Тут интересно</a>
+      <a href="/stats" style="margin: 0 20px; text-decoration: none; color: #2e7d32;">Статистика</a>
+    <a href="/report" style="margin: 0 20px; text-decoration: none; color: #2e7d32;">Сообщить о проблеме</a>
+
+  </nav>
+</header>
+
+
+</head>
+<body>
+  <div class="form-container">
+    <h2>Сообщите о проблеме</h2>
+    <form action="/report" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label>Имя (необязательно)</label>
+        <input type="text" name="username" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Местоположение (нажмите на карту)</label>
+        <div id="map"></div>
+        <input type="hidden" id="lat" name="latitude">
+        <input type="hidden" id="lng" name="longitude">
+      </div>
+
+      <div class="form-group">
+        <label>Категория проблемы</label>
+        <select name="category" class="form-control" required>
+          <option value="">Выберите</option>
+          <option value="Мусор">Мусор</option>
+          <option value="Загрязнение воды">Загрязнение воды</option>
+          <option value="Загрязнение воздуха">Загрязнение воздуха</option>
+          <option value="Отсутствие зелени">Отсутствие зелени</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Описание</label>
+        <textarea name="description" class="form-control" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Фото (необязательно)</label>
+        <input type="file" name="photo" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-success btn-block">Отправить</button>
+    </form>
+  </div>
+
+  <script>
+    var map = L.map('map').setView([51.1605, 71.4704], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    var marker;
+    map.on('click', function(e) {
+      if (marker) map.removeLayer(marker);
+      marker = L.marker(e.latlng).addTo(map);
+      document.getElementById('lat').value = e.latlng.lat;
+      document.getElementById('lng').value = e.latlng.lng;
+    });
+  </script>
+</body>
+</html>
