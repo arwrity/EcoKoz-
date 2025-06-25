@@ -1,59 +1,342 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EcoMap — Экологическая карта</title>
-  
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-o9N1j6raZkE1Xn4SzM+IPm1w+DSA9kF9y8fXlY9Kc7o="
-    crossorigin=""
-  />
+    <meta charset="UTF-8">
+    <title>EcoMap</title>
 
-  <style>
-    /* Стили для страницы и карты */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-    }
-    #map {
-      height: 100vh; /* во всю высоту экрана */
-      width: 100%;
-    }
-  </style>
+    <!-- Leaflet -->
+    <script src="{{ url_for('static', filename='jquery-2.2.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='demo.css') }}">
+
+    <!-- Custom styles -->
+    <style>
+        body {
+            background-color: #fefbe9; /* нежно-зелёный фон */
+            font-family: "Segoe UI", sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #2f6e31;
+        }
+
+        #llmap {
+            width: 70%;
+            height: 500px;
+            margin: 0 auto 30px auto;
+            border: 2px solid #a6d8a8;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(50, 100, 50, 0.2);
+        }
+
+        select {
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Карта -->
-  <div id="map"></div>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: ##fefbe9;
+  }
 
-  <!-- Leaflet JS -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-sA+4GQNkVwFb+G+Y5I9lcQ4Af9QhP4B3kgdR1j0HH3s="
-    crossorigin=""
-  ></script>
+  h1, h2, h3 {
+    font-weight: 800;
+    color: #1d4b3e;
+  }
 
-  <script>
-    // Инициализация карты на Астане
-    var map = L.map('map').setView([51.1605, 71.4704], 13);
+  .highlight {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    color: #1d4b3e;
+  }
+</style>
 
-    // Подключаем карту OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
 
-    // Тестовые маркеры
-    L.marker([51.162, 71.467]).addTo(map)
-      .bindPopup("<b>Свалка у реки</b><br>Горы мусора на берегу");
+    <header class="main-header">
+  <div class="logo-area">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="EcoKöz" class="logo-img">
+  </div>
 
-    L.marker([51.155, 71.480]).addTo(map)
-      .bindPopup("<b>Промышленный дым</b><br>Загрязнение воздуха от завода");
-  </script>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
 
+   <nav class="nav-links">
+    <a href="/">Home</a>
+    <a href="#about">О проекте</a>
+    <a href="#facts">Тут интересно</a>
+    <a href="/stats">Статистика</a>
+    <a href="/report" class="report-button">Сообщить о проблеме</a>
+  </nav>
+</header>
+
+
+<section style="text-align: center; padding: 200px 40px;">
+  <h2 style="font-size: 56px; color: #264f44; font-family: 'Georgia', serif;">
+    “Be a part of the solution, not part of the pollution”
+  </h2>
+</section>
+
+
+        <!-- Волнообразный SVG -->
+<div class="wave-container">
+  <svg viewBox="0 0 1600 320" preserveAspectRatio="none">
+    <path fill="none" stroke="#f6c453" stroke-width="2" d="M0,160 C60,186.7 120,213 180,240 C240,267 300,277.3 360,277.3 C420,277.3 480,256 540,224 C600,192 660,160 720,165.3 C780,171 840,213 900,234.7 C960,256 1020,256 1080,256 C1140,256 1200,224 1260,192 C1320,160 1380,160 1440,165.3 C1500,171 1560,213 1600,234.7"></path>
+  </svg>
+</div>
+
+
+<section class="about-section">
+  <div class="about-left">
+    <h2>О проекте</h2>
+    <p>
+      EcoKöz — это платформа, направленная на выявление и устранение экологических проблем. Мы верим, что каждый может стать частью решения. Помогите сделать наш регион чище и безопаснее!
+    </p>
+  </div>
+
+  <!-- Волна между колонками -->
+  <div class="about-divider">
+    <svg viewBox="0 0 100 600" preserveAspectRatio="none">
+      <path fill="#264f44" d="M0,0 C40,100 60,200 0,300 C60,400 40,500 0,600 L100,600 L100,0 Z" />
+    </svg>
+  </div>
+
+  <div class="about-right">
+    <img src="{{ url_for('static', filename='tree-about.png') }}" alt="EcoMap Screenshot">
+  </div>
+</section>
+
+
+
+
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 40px 0; padding: 20px; background-color: #f4fdf5; border-radius: 12px;">
+
+  <!-- Левая часть: текст -->
+  <div style="flex: 1; padding-right: 20px; background-color: #f6c453; ">
+    <h2 style="font-size: 24px; font-family: 'Georgia' color: #2e7d32;">Сделаем наш город чище вместе 🌱</h2>
+    <p style="font-size: 24px;font-family: 'Segoe UI'; color: #444;">
+      Если вы заметили экологическую проблему — загрязнение, мусор, вырубку деревьев или другое — вы можете рассказать об этом через нашу форму.
+    </p>
+  </div>
+
+  <!-- Правая часть: изображение + кнопка -->
+  <div style="flex: 1; text-align: center; background-color: #f4fff4;">
+    <img src="https://www.svgrepo.com/show/117915/earth-with-leaf.svg" alt="Eco icon" style="max-width: 120px; margin-bottom: 20px;" />
+    <br>
+    <a href="/report" class="btn btn-success" style="font-size: 18px; padding: 10px 20px;">
+      Хотите сообщить о проблеме?
+    </a>
+  </div>
+
+</div>
+<section id="facts" > </section>
+    <div style="width: 100%; overflow: hidden; padding: 30px; background: #f2fdf2;">
+  <h2 style="color: #264f44;">Тут интересно 💡</h2>
+</div>
+
+
+<style>
+  .carousel-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px auto;
+    gap: 20px;
+    perspective: 1200px;
+  }
+
+  .carousel-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    height: 260px;
+    padding: 20px;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0.6;
+    transform: scale(0.85);
+    position: relative;
+    z-index: 0;
+  }
+
+  .carousel-card.active {
+    width: 300px;
+    height: 300px;
+    transform: scale(1.05);
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .carousel-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .carousel-buttons button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+
+  .carousel-buttons button:hover {
+    background-color: #256428;
+  }
+
+  .carousel-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 10px;
+  }
+
+  .carousel-desc {
+    font-size: 14px;
+    color: #333;
+  }
+</style>
+
+<div class="carousel-wrapper" id="carousel">
+  <!-- Карточки создаются динамически -->
+</div>
+
+<div class="carousel-buttons">
+  <button onclick="prevCard()">← Назад</button>
+  <button onclick="nextCard()">Вперёд →</button>
+</div>
+
+<script>
+  const data = [
+    {
+      title: "Почему важно сортировать мусор?",
+      description: "Как переработка влияет на климат и экономику вашего города."
+    },
+    {
+      title: "Что такое микропластик?",
+      description: "Мелкие частицы — большая проблема для океанов и нас."
+    },
+    {
+      title: "Где в Казахстане хуже всего с воздухом?",
+      description: "Данные мониторинга по регионам и реальные кейсы."
+    },
+    {
+      title: "Зачем беречь воду?",
+      description: "Как ежедневные привычки влияют на водный след."
+    }
+  ];
+
+  let currentIndex = 0;
+
+  function renderCarousel() {
+    const container = document.getElementById("carousel");
+    container.innerHTML = "";
+
+    const leftIndex = (currentIndex - 1 + data.length) % data.length;
+    const rightIndex = (currentIndex + 1) % data.length;
+
+    const indices = [leftIndex, currentIndex, rightIndex];
+
+    indices.forEach((index, i) => {
+      const item = data[index];
+      const card = document.createElement("div");
+      card.classList.add("carousel-card");
+      if (i === 1) card.classList.add("active");
+
+      card.innerHTML = `
+        <div class="carousel-title">${item.title}</div>
+        <div class="carousel-desc">${item.description}</div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  function nextCard() {
+    currentIndex = (currentIndex + 1) % data.length;
+    renderCarousel();
+  }
+
+  function prevCard() {
+    currentIndex = (currentIndex - 1 + data.length) % data.length;
+    renderCarousel();
+  }
+
+  renderCarousel();
+</script>
+
+
+
+        <!-- Волнообразный SVG -->
+<div class="wave-container">
+ <svg viewBox="20 40 1440 320">
+  <path fill="#264f44" fill-opacity="1" d="M0,160L60,186.7C120,213,240,267,360,277.3C480,288,600,256,720,224C840,192,960,160,1080,165.3C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+ </svg>
+</div>
+
+
+
+<footer class="footer">
+  <div class="footer-columns">
+    <div class="footer-col">
+      <h3> What We Do </h3>
+      <ul>
+        <li><a href="#">EcoMap Goals</a></li>
+        <li><a href="#">Green Reports</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>ABOUT</h3>
+      <ul>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>LEGAL</h3>
+      <ul>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+
+  </div>
+    <div class="footer-col">
+      <h3>FOLLOW</h3>
+      <div class="social-icons">
+        <a href="#"><img src="https://img.icons8.com/ios-filled/24/000000/instagram-new.png"/></a>
+        <a href="#"><img src="https://img.icons8.com/ios-filled/24/000000/facebook-new.png"/></a>
+        <a href="#"><img src="https://img.icons8.com/ios-filled/24/000000/github.png"/></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+ </div>
+    <script src="{{ url_for('static', filename='demo.js') }}"></script>
 </body>
 </html>
