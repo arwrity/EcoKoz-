@@ -77,11 +77,13 @@
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
 
+
    <nav class="nav-links">
     <a href="/">Home</a>
     <a href="#about">О проекте</a>
     <a href="#facts">Тут интересно</a>
     <a href="/stats">Статистика</a>
+       <a href="#contacts">Contacts</a>
     <a href="/report" class="report-button">Сообщить о проблеме</a>
   </nav>
 </header>
@@ -102,7 +104,7 @@
 </div>
 
 
-<section class="about-section">
+<section id="about" class="about-section">
   <div class="about-left">
     <h2>О проекте</h2>
     <p>
@@ -223,8 +225,8 @@
 </div>
 
 <div class="carousel-buttons">
-  <button onclick="prevCard()">← Назад</button>
-  <button onclick="nextCard()">Вперёд →</button>
+  <button onclick="prevCard()">← </button>
+  <button onclick="nextCard()">→</button>
 </div>
 
 <script>
@@ -296,8 +298,8 @@
 </div>
 
 
-
-<footer class="footer">
+<section id="contacts" class="footer" class="footer-columns" class="footer-col">
+<footer  class="footer">
   <div class="footer-columns">
     <div class="footer-col">
       <h3> What We Do </h3>
@@ -334,7 +336,7 @@
     </div>
   </div>
 </footer>
-
+</section>
 
  </div>
     <script src="{{ url_for('static', filename='demo.js') }}"></script>
