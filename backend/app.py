@@ -77,7 +77,7 @@ def report():
 if __name__ == '__main__':
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == 'mkdb':
-        with app.app_context():  
+        with app.app_context():  # ⬅️ ВАЖНО: добавляем контекст приложения
             db.create_all()
             print("📦 База данных создана!")
     else:
