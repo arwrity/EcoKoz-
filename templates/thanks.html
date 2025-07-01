@@ -1,8 +1,9 @@
 <html>
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <link rel="stylesheet" href="{{ url_for('static', filename='demo.css') }}">
   <style>
-    body { background-color: #e9fbe9; text-align: center; padding-top: 100px; }
+    body { background-color: #fefbe9; text-align: center; padding-top: 10px; }
     .message { font-size: 24px; }
   </style>
 
@@ -10,19 +11,22 @@
 </head>
 <body>
 
-<header style="background-color: #e6f2e6; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
-  <div style="font-size: 32px; font-weight: bold; color: #2e7d32;">
-    🌱 EcoKöz
+ <header class="main-header">
+  <div class="logo-area">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="EcoKöz" class="logo-img">
   </div>
 
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
 
-  <nav>
-    <a href="/" style="margin: 0 20px; text-decoration: none; color: #2e7d32;">Home</a>
-      <a href="#about" style="margin: 0 20px; text-decoration: none; color: #2e7d32;" >О проекте</a>
-      <a href="#facts" style="margin: 0 20px; text-decoration: none; color: #2e7d32;" >Тут интересно</a>
-      <a href="/stats" style="margin: 0 20px; text-decoration: none; color: #2e7d32;">Статистика</a>
-    <a href="/report" style="margin: 0 20px; text-decoration: none; color: #2e7d32;">Сообщить о проблеме</a>
 
+   <nav class="nav-links">
+    <a href="/">Home</a>
+    <a href="#about">О проекте</a>
+    <a href="#facts">Тут интересно</a>
+    <a href="/stats">Статистика</a>
+       <a href="#contacts">Contacts</a>
+    <a href="/report" class="report-button">Сообщить о проблеме</a>
   </nav>
 </header>
 
