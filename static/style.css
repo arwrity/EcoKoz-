@@ -3,7 +3,6 @@
      width: 400px;
 }
 
-/* основа: адаптировано из business-product */
 .main-header {
   position: sticky;
   top: 0;
@@ -15,7 +14,7 @@
   z-index: 100;
 }
 
-/* логотип */
+
 .logo-area {
   display: flex;
   align-items: center;
