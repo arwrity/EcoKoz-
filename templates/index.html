@@ -46,6 +46,7 @@
 </head>
 <body>
 
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   body {
@@ -80,11 +81,11 @@
 
    <nav class="nav-links">
     <a href="/">Home</a>
-    <a href="#about">О проекте</a>
-    <a href="#facts">Тут интересно</a>
+    <a href="#about">About Us</a>
+    <a href="#facts">Explore</a>
     <a href="/stats">Статистика</a>
        <a href="#contacts">Contacts</a>
-    <a href="/report" class="report-button">Сообщить о проблеме</a>
+    <a href="/report" class="report-button">Report an issue</a>
   </nav>
 </header>
 
@@ -121,6 +122,38 @@
 
   <div class="about-right">
     <img src="{{ url_for('static', filename='tree-about.png') }}" alt="EcoMap Screenshot">
+  </div>
+</section>
+
+
+<section class="values-section">
+  <h2 class="values-title">What we stand for</h2>
+  <div class="values-container">
+
+    <div class="value-block">
+      <img src="{{ url_for('static', filename='agriculture.png') }}" alt="Tree icon">
+      <h4>100% of profits for the planet</h4>
+      <p>We use all our profits for climate action, with the majority going into tree-planting projects around the world.</p>
+    </div>
+
+    <div class="value-block">
+      <img src="{{ url_for('static', filename='connected.png') }}" alt="Community icon">
+      <h4>Collective climate action</h4>
+      <p>The EcoKöz community is part of the global tree-planting movement, making a difference every day.</p>
+    </div>
+
+    <div class="value-block">
+      <img src="{{ url_for('static', filename='charity.png') }}" alt="Chart icon">
+      <h4>No greenwashing</h4>
+      <p>We tell you transparently how much money we make and how much we spend on tree planting and climate action.</p>
+    </div>
+
+    <div class="value-block">
+      <img src="{{ url_for('static', filename='clover-leaf.png') }}" alt="Sun icon">
+      <h4>Beyond neutral</h4>
+      <p>Our solar panels produce enough energy to power your actions twice over, contributing to a greener grid.</p>
+    </div>
+
   </div>
 </section>
 
@@ -299,7 +332,7 @@
 
 
 <section id="contacts" class="footer" class="footer-columns" class="footer-col">
-<footer  class="footer">
+<footer  class="footer" > </footer>
   <div class="footer-columns">
     <div class="footer-col">
       <h3> What We Do </h3>
